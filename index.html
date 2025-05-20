@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: math;
+      }
+      button {
+        width: 49%;
+        padding: 18px 8px;
+      }
+    </style>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h3>Положительные</h3>
+    <button onclick="sendSound('oh_my_god.mp3')">oh_my_god</button>
+    <button onclick="sendSound('clap.mp3')">Аплодисменты</button>
+    <h3>Недовольство</h3>
+    <button onclick="sendSound('no_god.MP3')">no_god (Сериал офис)</button>
+    <h3>Звуки чего-то</h3>
+    <button onclick="sendSound('comes_money.MP3')">Comes money (music)</button>
+    <button onclick="sendSound('money.mp3')">money</button>
+    <script>
+      // в конце домена #{ip_address}
+      const domain = window.location.hash.slice(1);
+      const socket = io(`http://${domain}`);
+      function sendSound(s) {
+        socket.emit("play_sound", s);
+      }
+    </script>
+  </body>
+</html>
